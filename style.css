@@ -42,14 +42,27 @@ td {
 }
 
 .info {
-    float: left;
     font-size: 2rem;
     text-align: center;
     width: 25%;
+}
+
+.luke-info{
+    float: left;
 }
 
 .nick-info {
     float: right;
 }
 
+.description {
+    font-size: 3rem;
+    text-align: center;
+}
+
+#description-field{
+    height: 3rem;
+    width: 30%;
+    transform: translateY(-15%);
+}
 
