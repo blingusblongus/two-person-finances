@@ -1,0 +1,55 @@
+body {
+    background-color: beige;
+}
+
+h1 {
+    text-align: center;
+    font-size: 7rem;
+}
+
+h2 {
+    text-align: center;
+    font-size: 7rem;
+}
+
+table {
+    text-align: center;
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 50%;
+    margin: auto auto;
+    font-size: 7rem;
+    background-color: white;
+}
+
+td {
+    border: 1px solid black;
+}
+
+.clear {
+    background-color: skyblue;
+    width: 100%;
+}
+
+#submit {
+    text-align: center;
+    font-size: 7rem;
+    width: 50%;
+    background-color: greenyellow;
+    border: 1px solid black;
+    margin: auto auto;
+    margin-top: 5rem;
+}
+
+.info {
+    float: left;
+    font-size: 2rem;
+    text-align: center;
+    width: 25%;
+}
+
+.nick-info {
+    float: right;
+}
+
+
