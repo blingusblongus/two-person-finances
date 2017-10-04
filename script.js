@@ -21,6 +21,10 @@ $("td").click(function(){
     setNumber(num);
 });
 
+$("#submit").click(function(){
+    adjustTotals(display);
+})
+
 //Functions
 function setNumber(number){
     value += number;
@@ -34,4 +38,16 @@ function setNumber(number){
     }
 
     $("#num").html(display);
+}
+
+function adjustTotals(string){
+    let str = string.slice(1,string.length);
+    let num = parseFloat(str);
+    lukeValue+=num;
+    nickValue-=num;
+
+    $("#luke-value").html("$" + lukeValue);
+    $("#nick-value").html("$" + nickValue);
+
+    window.alert(num);
 }

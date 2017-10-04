@@ -63,6 +63,7 @@ td {
 #description-field{
     height: 3rem;
     width: 30%;
-    transform: translateY(-15%);
+    font-size: 3rem;
+    text-align: center;
 }
 
