@@ -51,14 +51,12 @@ function adjustTotals(string){
     let str = string.slice(1,string.length);
     let num = parseFloat(str);
 
-    if($('#luke-selector').hasClass('selector-active')){
-        lukeValue+=num;
-        nickValue-=num;
-    }else{
-        lukeValue-=num;
-        nickValue+=num;
+    if($('#nick-selector').hasClass('selector-active')){
+        num = -num;
     }
 
+    lukeValue+=num;
+    nickValue-=num;
 
     $("#luke-value").html("$" + lukeValue);
     $("#nick-value").html("$" + nickValue);
@@ -67,7 +65,14 @@ function adjustTotals(string){
 function logData(string){
     let str = string.slice(1,string.length);
     let num = parseFloat(str);
+
+    if($('#nick-selector').hasClass('selector-active')){
+        num = -num;
+    }
+
     let description = $('#description-field').val();
 
-    //Add server-side connection here
+    google.script.run.addItem(description, num)
 }
+
+
