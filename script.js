@@ -6,8 +6,8 @@ String.prototype.formatCents = function(){
 //Global vars
 let display = "$0.00";
 let value = "";
-let lukeValue = 0;
-let nickValue = 0;
+let lukeValue = parseFloat($('#luke-value').html());
+let nickValue = parseFloat($('#nick-value').html());
 
 //Event Listeners
 $("td").click(function(){
@@ -32,6 +32,12 @@ $(".selector").click(function(){
     }
 })
 
+$(".direct__button").click(function(){
+    if(!$(this).hasClass('direct__button--active')){
+        $(this).toggleClass('direct__button--active').siblings().removeClass('direct__button--active');
+    }
+})
+
 //Functions
 function setNumber(number){
     value += number;
@@ -49,7 +55,7 @@ function setNumber(number){
 
 function adjustTotals(string){
     let str = string.slice(1,string.length);
-    let num = parseFloat(str);
+    let num = parseFloat(str)/2;
 
     if($('#nick-selector').hasClass('selector-active')){
         num = -num;
@@ -64,7 +70,7 @@ function adjustTotals(string){
 
 function logData(string){
     let str = string.slice(1,string.length);
-    let num = parseFloat(str);
+    let num = parseFloat(str)/2;
 
     if($('#nick-selector').hasClass('selector-active')){
         num = -num;

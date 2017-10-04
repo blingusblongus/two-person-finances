@@ -20,6 +20,7 @@ function getStartingValues(){
 
   var lukeValue = sheet.getRange('C1').getValue();
   var nickValue = sheet.getRange('D1').getValue();
+  var content = [lukeValue.toFixed(2), nickValue.toFixed(2)];
 
-  return [lukeValue, nickValue];
+  return content;
 }

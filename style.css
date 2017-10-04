@@ -77,3 +77,42 @@ td {
     color: yellow;
 }
 
+.direct {
+    width: 50%;
+    margin: 1rem auto 0;
+    border: 1px solid black;
+    padding: 3px;
+}
+
+.direct-label {
+    margin-top: 1rem;
+    width: 50%%;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.direct__button {
+    font-size: 3rem;
+    text-align: center;
+    width: 10%;
+    margin: auto auto;
+}
+
+.direct__button--yes {
+    width: 48%;
+    display: inline-block;
+}
+
+.direct__button--no {
+    width: 48%;
+    float: right;
+    display: inline-block;
+}
+
+.direct__button--active {
+    background-color: whitesmoke;
+    border: .2rem solid red;
+    border-radius: 1rem;
+    margin: -.2rem;
+}
