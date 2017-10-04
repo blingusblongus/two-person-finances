@@ -23,6 +23,7 @@ $("td").click(function(){
 
 $("#submit").click(function(){
     adjustTotals(display);
+    logData(display);
 })
 
 //Functions
@@ -48,6 +49,12 @@ function adjustTotals(string){
 
     $("#luke-value").html("$" + lukeValue);
     $("#nick-value").html("$" + nickValue);
+}
 
-    window.alert(num);
+function logData(string){
+    let str = string.slice(1,string.length);
+    let num = parseFloat(str);
+    let description = $('#description-field').val();
+
+    //Add server-side connection here
 }
