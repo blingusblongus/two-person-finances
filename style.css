@@ -67,3 +67,13 @@ td {
     text-align: center;
 }
 
+.selector{
+    float: left;
+    width: 50%;
+}
+
+.selector-active {
+    background-color: green;
+    color: yellow;
+}
+

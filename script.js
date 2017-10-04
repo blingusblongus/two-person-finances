@@ -26,6 +26,12 @@ $("#submit").click(function(){
     logData(display);
 })
 
+$(".selector").click(function(){
+    if(!$(this).hasClass('selector-active')){
+        $(this).toggleClass('selector-active').siblings().removeClass('selector-active');
+    }
+})
+
 //Functions
 function setNumber(number){
     value += number;
@@ -44,8 +50,15 @@ function setNumber(number){
 function adjustTotals(string){
     let str = string.slice(1,string.length);
     let num = parseFloat(str);
-    lukeValue+=num;
-    nickValue-=num;
+
+    if($('#luke-selector').hasClass('selector-active')){
+        lukeValue+=num;
+        nickValue-=num;
+    }else{
+        lukeValue-=num;
+        nickValue+=num;
+    }
+
 
     $("#luke-value").html("$" + lukeValue);
     $("#nick-value").html("$" + nickValue);
