@@ -55,8 +55,16 @@ function setNumber(number){
 
 function adjustTotals(string){
     let str = string.slice(1,string.length);
-    let num = parseFloat(str)/2;
+    let num;
 
+    //Check if value needs halving
+    if($('.direct__button--yes').hasClass('direct__button--active')){
+        num = parseFloat(str);
+    }else{
+        num = parseFloat(str)/2;
+    }
+
+    //Check if it's nick or luke who's paying
     if($('#nick-selector').hasClass('selector-active')){
         num = -num;
     }
@@ -70,7 +78,14 @@ function adjustTotals(string){
 
 function logData(string){
     let str = string.slice(1,string.length);
-    let num = parseFloat(str)/2;
+    let num;
+
+    //Check if value needs halving
+    if($('.direct__button--yes').hasClass('direct__button--active')){
+        num = parseFloat(str);
+    }else{
+        num = parseFloat(str)/2;
+    }
 
     if($('#nick-selector').hasClass('selector-active')){
         num = -num;
