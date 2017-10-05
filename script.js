@@ -6,8 +6,12 @@ String.prototype.formatCents = function(){
 //Global vars
 let display = "$0.00";
 let value = "";
-let lukeValue = parseFloat($('#luke-value').html());
-let nickValue = parseFloat($('#nick-value').html());
+let lukeValue = 0;
+let nickValue = 0;
+
+//Set Values
+lukeValue = parseFloat($('#luke-value').html());
+nickValue = parseFloat($('#nick-value').html());
 
 //Event Listeners
 $("td").click(function(){
@@ -42,19 +46,19 @@ $(".direct__button").click(function(){
 function setNumber(number){
     value += number;
     if(value.length === 1){
-        display = "$0.0" + value;
+        display = "0.0" + value;
     }else if(value.length === 2){
-        display = "$0." + value;
+        display = "0." + value;
     }else if(value.length > 2){
-        display = "$" + value;
+        display = value;
         display = display.formatCents();
     }
 
-    $("#num").html(display);
+    $("#num").html(parseFloat(display));
 }
 
 function adjustTotals(string){
-    let str = string.slice(1,string.length);
+    let str = string;
     let num;
 
     //Check if value needs halving
