@@ -54,7 +54,7 @@ function setNumber(number){
         display = display.formatCents();
     }
 
-    $("#num").html(parseFloat(display));
+    $("#num").html(parseFloat(display).toFixed(2));
 }
 
 function adjustTotals(string){
@@ -76,8 +76,8 @@ function adjustTotals(string){
     lukeValue+=num;
     nickValue-=num;
 
-    $("#luke-value").html("$" + lukeValue);
-    $("#nick-value").html("$" + nickValue);
+    $("#luke-value").html("$" + lukeValue.toFixed(2));
+    $("#nick-value").html("$" + nickValue.toFixed(2));
 }
 
 function logData(string){
