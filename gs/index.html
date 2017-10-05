@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Finances: Luke</title>
+    <style>
+     body {
+    background-color: beige;
+}
+
+h1 {
+    text-align: center;
+    font-size: 7rem;
+}
+
+h2 {
+    text-align: center;
+    font-size: 7rem;
+}
+
+table {
+    text-align: center;
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 50%;
+    margin: auto auto;
+    font-size: 7rem;
+    background-color: white;
+}
+
+td {
+    border: 1px solid black;
+}
+
+.clear {
+    background-color: skyblue;
+    width: 100%;
+}
+
+#submit {
+    text-align: center;
+    font-size: 7rem;
+    width: 50%;
+    background-color: greenyellow;
+    border: 1px solid black;
+    margin: auto auto;
+    margin-top: 5rem;
+}
+
+.info {
+    font-size: 2rem;
+    text-align: center;
+    width: 25%;
+}
+
+.luke-info{
+    float: left;
+}
+
+.nick-info {
+    float: right;
+}
+
+.description {
+    font-size: 3rem;
+    text-align: center;
+}
+
+#description-field{
+    height: 3rem;
+    width: 30%;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.selector{
+    float: left;
+    width: 50%;
+}
+
+.selector-active {
+    background-color: green;
+    color: yellow;
+}
+
+.direct {
+    width: 50%;
+    margin: 1rem auto 0;
+    border: 1px solid black;
+    padding: 3px;
+}
+
+.direct-label {
+    margin-top: 1rem;
+    width: 50%%;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.direct__button {
+    font-size: 3rem;
+    text-align: center;
+    width: 10%;
+    margin: auto auto;
+}
+
+.direct__button--yes {
+    width: 48%;
+    display: inline-block;
+}
+
+.direct__button--no {
+    width: 48%;
+    float: right;
+    display: inline-block;
+}
+
+.direct__button--active {
+    background-color: whitesmoke;
+    border: .2rem solid red;
+    border-radius: 1rem;
+    margin: -.2rem;
+}
+
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <? var initValues = getStartingValues(); ?>
+
+</head>
+<body>
+ <h1 class="selector selector-active" id="luke-selector">Luke</h1>
+ <h1 class="selector" id="nick-selector">Nick</h1>
+
+ <div class="description">
+     <label for="description-field">Description: </label>
+     <input type="text" id="description-field">
+ </div>
+
+  <div class="direct">
+    <div class="direct-label">
+     Direct Payment:
+ </div>
+     <div class="direct__button direct__button--yes">Yes</div>
+     <div class="direct__button direct__button--no direct__button--active">No</div>
+ </div>
+
+ <div class="display">
+    <div class="info luke-info">
+        <h3>Luke</h3>
+        <h3 id="luke-value"><?= initValues[0] ?></h3>
+    </div>
+        <div class="info nick-info">
+        <h3>Nick</h3>
+        <h3 id="nick-value"><?= initValues[1]?></h3>
+    </div>
+     <h2 id="num">$0.00</h2>
+
+ </div>
+
+   <table>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>0</td>
+        <td></td>
+    </tr>
+    <tr>
+       <td class="clear" colspan="3">
+           <div class="clear">Clear</div>
+       </td>
+    </tr>
+    </table>
+
+    <div class="button" id="submit">
+        Submit
+    </div>
+
+</body>
+
+<script>
+//Prototypes
+String.prototype.formatCents = function(){
+    return this.slice(0, this.length - 2) + "." + this.slice(-2);
+}
+
+//Global vars
+let display = "$0.00";
+let value = "";
+let lukeValue = 0;
+let nickValue = 0;
+
+//Set Values
+lukeValue = parseFloat($('#luke-value').html());
+nickValue = parseFloat($('#nick-value').html());
+
+//Event Listeners
+$("td").click(function(){
+    if($(this).hasClass("clear")){
+        display = "$0.00";
+        value = "";
+        $("#num").html(display);
+        return;
+    }
+    const num = $(this).html()
+    setNumber(num);
+});
+
+$("#submit").click(function(){
+    adjustTotals(display);
+    logData(display);
+})
+
+$(".selector").click(function(){
+    if(!$(this).hasClass('selector-active')){
+        $(this).toggleClass('selector-active').siblings().removeClass('selector-active');
+    }
+})
+
+$(".direct__button").click(function(){
+    if(!$(this).hasClass('direct__button--active')){
+        $(this).toggleClass('direct__button--active').siblings().removeClass('direct__button--active');
+    }
+})
+
+//Functions
+function setNumber(number){
+    value += number;
+    if(value.length === 1){
+        display = "0.0" + value;
+    }else if(value.length === 2){
+        display = "0." + value;
+    }else if(value.length > 2){
+        display = value;
+        display = display.formatCents();
+    }
+
+    $("#num").html(parseFloat(display).toFixed(2));
+}
+
+function adjustTotals(string){
+    let str = string;
+    let num;
+
+    //Check if value needs halving
+    if($('.direct__button--yes').hasClass('direct__button--active')){
+        num = parseFloat(str);
+    }else{
+        num = parseFloat(str)/2;
+    }
+
+    //Check if it's nick or luke who's paying
+    if($('#nick-selector').hasClass('selector-active')){
+        num = -num;
+    }
+
+    lukeValue+=num;
+    nickValue-=num;
+
+    $("#luke-value").html("$" + lukeValue.toFixed(2));
+    $("#nick-value").html("$" + nickValue.toFixed(2));
+}
+
+function logData(string){
+    let str = string.slice(1,string.length);
+    let num;
+
+    //Check if value needs halving
+    if($('.direct__button--yes').hasClass('direct__button--active')){
+        num = parseFloat(str);
+    }else{
+        num = parseFloat(str)/2;
+    }
+
+    if($('#nick-selector').hasClass('selector-active')){
+        num = -num;
+    }
+
+    let description = $('#description-field').val();
+
+    google.script.run.addItem(description, num)
+}
+
+
+
+
+
+</script>
+
+</html>
