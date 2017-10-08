@@ -81,7 +81,7 @@ function adjustTotals(string){
 }
 
 function logData(string){
-    let str = string.slice(1,string.length);
+    let str = string;
     let num;
 
     //Check if value needs halving
