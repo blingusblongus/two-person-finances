@@ -27,6 +27,7 @@ $("td").click(function(){
 });
 
 $("#submit").click(function(){
+    $(this).html("Submitting...");
     adjustTotals(display);
     logData(display);
 })
@@ -100,7 +101,7 @@ function logData(string){
 
     let description = $('#description-field').val();
 
-    google.script.run.addItem(description, num)
+    google.script.run.withSuccessHandler(submitComplete).addItem(description, num);
 }
 
 function setColors(){
@@ -114,5 +115,14 @@ function setColors(){
         $('#luke-value').css('color', 'red');
         $('#nick-value').css('color', 'green');
     }
+}
+
+function submitComplete(){
+    $('#description-field').val('');
+    $('#submit').html("Submit");
+    display = 0.00;
+    value = "";
+    $('#num').html("0.00");
+    alert('Successfully Submitted');
 }
 
