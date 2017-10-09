@@ -149,11 +149,11 @@ td {
  <div class="display">
     <div class="info luke-info">
         <h3>Luke</h3>
-        <h3 id="luke-value"><?= initValues[0] ?></h3>
+        <h3 class="value" id="luke-value"><?= initValues[0] ?></h3>
     </div>
         <div class="info nick-info">
         <h3>Nick</h3>
-        <h3 id="nick-value"><?= initValues[1]?></h3>
+        <h3 class="value" id="nick-value"><?= initValues[1]?></h3>
     </div>
      <h2 id="num">$0.00</h2>
 
@@ -205,9 +205,10 @@ let value = "";
 let lukeValue = 0;
 let nickValue = 0;
 
-//Set Values
+//Set Values and colors
 lukeValue = parseFloat($('#luke-value').html());
 nickValue = parseFloat($('#nick-value').html());
+setColors();
 
 //Event Listeners
 $("td").click(function(){
@@ -274,6 +275,8 @@ function adjustTotals(string){
 
     $("#luke-value").html("$" + lukeValue.toFixed(2));
     $("#nick-value").html("$" + nickValue.toFixed(2));
+
+    setColors();
 }
 
 function logData(string){
@@ -296,10 +299,21 @@ function logData(string){
     google.script.run.addItem(description, num)
 }
 
+function setColors(){
+    const lukeNum = parseFloat($('#luke-value').html());
+    if(lukeNum == 0){
+        $(".total").css("color", 'black');
+    }else if(lukeNum > 0){
+        $('#luke-value').css('color', 'green');
+        $('#nick-value').css('color', 'red');
+    }else if(lukeNum < 0){
+        $('#luke-value').css('color', 'red');
+        $('#nick-value').css('color', 'green');
+    }
+}
 
 
 
-
-</script>
+    </script>
 
 </html>

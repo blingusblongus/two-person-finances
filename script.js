@@ -9,9 +9,10 @@ let value = "";
 let lukeValue = 0;
 let nickValue = 0;
 
-//Set Values
+//Set Values and colors
 lukeValue = parseFloat($('#luke-value').html());
 nickValue = parseFloat($('#nick-value').html());
+setColors();
 
 //Event Listeners
 $("td").click(function(){
@@ -78,6 +79,8 @@ function adjustTotals(string){
 
     $("#luke-value").html("$" + lukeValue.toFixed(2));
     $("#nick-value").html("$" + nickValue.toFixed(2));
+
+    setColors();
 }
 
 function logData(string){
@@ -100,4 +103,16 @@ function logData(string){
     google.script.run.addItem(description, num)
 }
 
+function setColors(){
+    const lukeNum = parseFloat($('#luke-value').html());
+    if(lukeNum == 0){
+        $(".total").css("color", 'black');
+    }else if(lukeNum > 0){
+        $('#luke-value').css('color', 'green');
+        $('#nick-value').css('color', 'red');
+    }else if(lukeNum < 0){
+        $('#luke-value').css('color', 'red');
+        $('#nick-value').css('color', 'green');
+    }
+}
 
